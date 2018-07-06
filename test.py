@@ -1,9 +1,10 @@
 from tkinter import *
 from tkinter import filedialog
 import binascii
+import os
 
 root=Tk()
-list=[]
+data=[]
 input("Press enter to input a file")
 root.filename =  filedialog.askopenfilename(initialdir = "C:/Users/SUMANTH/Desktop/",title = "Select file")
 with open(root.filename, "rb") as file_obj:
@@ -15,17 +16,22 @@ with open(root.filename, "rb") as file_obj:
 
 for i in range(0,len(b)-1,2):
 	s=(b[i]+b[i+1])
-	list.append(s)
-del list[0]
-#print(list)
+	data.append(s)
+del data[0]
+#print(len(data))
 file=open("file.txt",'w')
-for i in range(0,len(list),16):
-	#print(list[i:i+16])
-	file.write(str(list[i:i+16]))
+for i in range(0,len(data),16):
+	#print(len(data))
+	#print(i)
+	#print(data[i:i+16])
+	#file.write(str(data[i:i+16]))
+	#file.write('\n\n')
+	stop=i+16
+	for j in range(i,stop):
+		if j<len(data):
+			file.write(data[j])
+			file.write('\t')
 	file.write('\n\n')
+		
 file.close()
-	
-	
-	
-
-	
+os.system("notepad.exe file.txt")
